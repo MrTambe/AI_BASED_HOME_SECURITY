@@ -66,7 +66,7 @@ while True:
                         angle2 = int(param.split("=")[1])
                         servo2.duty_u16(angle_to_duty(angle2))
 
-                # ✅ Valid signal received
+                # Valid signal received
                 last_signal_time = time.time()
             except:
                 error_state = True
@@ -79,14 +79,14 @@ while True:
     except Exception as e:
         pass  # ignore timeout-based accept() errors
 
-    # 🧠 Check if signal timeout occurred
+    # Check if signal timeout occurred
     if error_state:
-        # ⚠️ Blink LED to indicate error
+        # Blink LED to indicate error
         led.toggle()
         time.sleep(0.2)
     elif time.time() - last_signal_time > signal_timeout_sec:
-        # ❌ No signal recently — turn off LED
+        # No signal recently — turn off LED
         led.off()
     else:
-        # ✅ Active communication — keep LED ON
+        # Active communication — keep LED ON
         led.on()
